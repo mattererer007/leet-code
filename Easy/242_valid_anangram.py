@@ -30,7 +30,7 @@ class Solution:
         return True              
 
     # Create a hash map of t such that  O(1) to search and key = letter and value = count
-    def createHash(self, t: str) ->  Dict[T1, T2]:
+    def createHash(self, t: str):
         hash_string = {}
 
         for x in t:
