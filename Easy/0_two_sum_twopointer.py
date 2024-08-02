@@ -70,14 +70,33 @@ class Solution(object):
 
         # Continue to iterate till each arary is length of 1 and then return
         return self.quickSort(left) + middle + self.quickSort(right) 
+    
+    def altTwoSum(self, nums, target):
+
+        hash = {}
+        for index, x in enumerate(nums):
+            if x in hash:
+                hash[x].append(index)
+            else: hash[x] = [index]
+
+        for x in nums:
+            other_nmbr = target - x
+            if other_nmbr in hash and other_nmbr != x:
+                return [hash[x][0], hash[target-x][0]]
+            elif other_nmbr in hash and other_nmbr == x:
+                if len(hash[x]) > 1:
+                    return [hash[x][0], hash[x][1]]
+        return [-1,-1]
+
+
 
 
 # Test case
 if __name__ == "__main__":
     solution = Solution()
-    nums = [-3,4,3, 90]
+    nums = [-3,4,3, 90, 90]
     target = 0
-    result = solution.twoSum(nums, target)
+    result = solution.altTwoSum(nums, target)
     print (result)
     # print("Indices of the two numbers are:", result) 
 
