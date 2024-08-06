@@ -21,8 +21,6 @@ You must write an algorithm that runs in O(log n) time.
 class Solution:
     def findPeakElement(self, nums: List[int]) -> int:
         
-        # find middle of index and see which side has a value greater than it
-
         # move to that value and see if it has a value grater than it...if not return index
 
         if nums is None or len(nums) <= 1: # Make sure there is a list to iterate through
