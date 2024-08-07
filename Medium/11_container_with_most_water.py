@@ -21,8 +21,8 @@ Assume there will be duplicate numbers in list
 
 from typing import List
 
-class Solution:
-    def maxArea(self, height: List[int]) -> int:
+class Solution: 
+    def maxArea(self, height: List[int]) -> int: # O(n) as no
 
         if len(height) < 2: # check if there are enough heights to hodl water
             return 0
