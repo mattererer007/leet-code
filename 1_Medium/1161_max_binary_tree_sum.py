@@ -49,7 +49,7 @@ class Solution:
             
             if sum > max_sum[0]: # if the max at a current level is greater than previous levels....
                 max_sum = (sum, level) # set the sum and the level as the new max_sum
-            level += 1 # count out them lvels
+            level += 1 # count out them levels
             
 
         return max_sum[1] # return just the level     
