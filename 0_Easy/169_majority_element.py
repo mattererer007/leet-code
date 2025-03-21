@@ -14,6 +14,10 @@ class Solution:
     def majorityElement(self, nums: List[int]) -> int:
         
         majority_element = 0
+        majority_count = 0
+
+        majority = len(nums)/2 + 1
+
         table = {}
 
         # Iterate and gather the count
@@ -23,8 +27,16 @@ class Solution:
             else:
                 table[num] = 1
 
+            if table[num] >= majority:
+                return num
+            
+        for unique_num in table:
+            if table[unique_num] > majority_count:
+                majority_element = unique_num
+                majority_count = table[unique_num]
         
-        return
+              
+        return majority_element
     
 
 if __name__ == "__main__":
