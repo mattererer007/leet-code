@@ -21,6 +21,13 @@ class Solution:
 
         # track the count of the greatest odd numbered letter
         max_odd_letter = 0
+
+        # Other odd letters
+        ## For everything else, an odd can become an even if you remove one...so just do that for all the small odd input1
+        sum_of_smaller_odd_numbers = 0
+
+        # 1 character present
+        char_with_1_entry_present = False
         
         # Iterate through entire string
         for char in s:
@@ -31,21 +38,36 @@ class Solution:
 
         # Check if even or odd
         for char in s_hash:
+
+            if s_hash[char] == 1:
+                char_with_1_entry_present = True
+
             if s_hash[char] % 2 == 0:
                 sum_of_even_letters += s_hash[char]
             elif s_hash[char] > max_odd_letter:
+                # Only add to sum of smaller odd numbers once something has already been added so that we don't go to -1
+                if max_odd_letter != 0:
+                    sum_of_smaller_odd_numbers += max_odd_letter - 1
                 max_odd_letter = s_hash[char]
+            else:  # for situations where odd but smaller that current max
+                sum_of_smaller_odd_numbers += s_hash[char] - 1  
+
 
         # Return
-        return sum_of_even_letters + max_odd_letter
+        total = sum_of_even_letters + max_odd_letter + sum_of_smaller_odd_numbers
+
+        if total % 2 == 0 and char_with_1_entry_present == True:
+            return total + 1
+        else:
+            return total
 
     
 
 
 if __name__ == "__main__":
-    sample = "a"
+    sample = "civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth"
+    sample2 = "ccc"
 
     solution = Solution()
 
-    print(solution.longestPalindrome(sample))
-
+    print(solution.longestPalindrome(sample2))
