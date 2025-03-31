@@ -68,7 +68,7 @@ class Solution(object):
         middle = [x for x in nums if x == pivot]
         right = [x for x in nums if x > pivot]
 
-        # Continue to iterate till each arary is length of 1 and then return
+        # Continue to iterate till each arrary is length of 1 and then return
         return self.quickSort(left) + middle + self.quickSort(right) 
     
     def altTwoSum(self, nums, target):
