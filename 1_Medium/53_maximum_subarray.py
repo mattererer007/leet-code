@@ -1,4 +1,5 @@
 from typing import List
+import copy
 
 """
 Given an integer array nums, find the with the largest sum, and return its sum.
@@ -34,6 +35,7 @@ x = 4 >> curr = 5, global = 6 (local upturn)
 """
 
 # O(n) time complexity, O(1) space complexity (just store 2 values)
+# With added value of returning array of numbers.... still O(n) time but O(n) space complexity (at worst)
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         
@@ -43,12 +45,23 @@ class Solution:
         # overal best given combinations so far explored
         global_best = float('-inf')
 
+        current_array = []
+        global_array = []
         # iterate through numbers 1 by 1
         for x in nums:
             currrent_best = max(x, currrent_best + x)
+
+            if currrent_best == x:
+                current_array = [x]
+            else:
+                current_array.append(x)                   
+
             global_best = max(global_best, currrent_best)
 
-        return global_best
+            if global_best == currrent_best:
+                global_array = copy.deepcopy(current_array)
+
+        return global_best, global_array
     
 if __name__ == "__main__":
     nums = [-2,1,-3,4,-1,2,1,-5,4]
