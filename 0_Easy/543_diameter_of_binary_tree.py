@@ -16,7 +16,7 @@ class TreeNode:
         self.right = right
 
 
-# O(n) time complexity with 'n' being the number of nodes O(1) space complexity with no values being stored
+# O(n) time complexity with 'n' being the number of nodes O(h) space complexity with the recursion stack being the heigh of the binary tree
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         
