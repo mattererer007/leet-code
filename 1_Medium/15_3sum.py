@@ -31,6 +31,7 @@ class Solution:
 
             for value in nums:
 
+                return
             
     
 
