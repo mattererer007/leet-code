@@ -20,65 +20,93 @@ ASSUMPTIONS
 - anticipate duplicates
 """
 
+# This solution focuses on sorting the numbers from least to greaatest and then selecting number as the unique number that two other numbers need to 
+# counteract to 0 (i.e., if i = 4, x+y == -4)
+# Merge Sort is used to sort the list of numbers for a time complexity of O(n * log(n))
+# Total time complexity is O(n^2) while with space being O(n^2) assuming all numbers are added multiple times to cover all possible combinations
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
+        
+        triplets = [] # to return a a list of unique triplet values that sum to 0
+        used_first_values = set() # In case of duplicate values in nums, this will make sure that unique cases around the
 
-        triplets = []
-        already_viewed = set()
-        already_found = set()
+        # Use recursion to sort numbers from least to greatest
+        nums = self.mergeSort(nums)
 
-        sorted_nums = self.mergeSort(nums)
+        # Iterate through all numbers in list as the unique number that two other numbers must counteract
+        for i in range(len(nums)):
+            current = nums[i]
 
-        for i in range(0, len(sorted_nums)):
-
-            if sorted_nums[i] > 0:
+            # Early termination: if current > 0, no valid triplet exists beyond this point
+            if current > 0:
                 break
 
-            if sorted_nums[i] in already_viewed:
+            # Skip duplicate fixed elements
+            if current in used_first_values:
                 continue
 
-            else:
-                lo,hi = 0, len(sorted_nums)-1
+            # Set pointers to iterate through list
+            # left is always i+1 such that current is never considered in solution
+            left, right = i + 1, len(nums) - 1
 
-                while lo < hi:
+            # While left and right do no cross....
+            while left < right:
+                # Determine total
+                total = current + nums[left] + nums[right]
 
-                    if lo == i:
-                        lo += 1
+                if total == 0:
+                    triplets.append([current, nums[left], nums[right]])
 
-                    elif hi == i:
-                        hi -= 1
+                    # Skip duplicates for left to not duplicate a solution
+                    prev_left = nums[left]
+                    while left < right and nums[left] == prev_left:
+                        left += 1
 
-                    elif sorted_nums[lo] + sorted_nums[i] + sorted_nums[hi] == 0:
+                    # Skip duplicates for right to not duplicate a solution
+                    prev_right = nums[right]
+                    while left < right and nums[right] == prev_right:
+                        right -= 1
 
-                        triplets.append([sorted_nums[lo], sorted_nums[i], sorted_nums[hi]])
-                        already_viewed.add(sorted_nums[i])
+                # If total is less than 0 then the left (negative number) needs to be increased
+                elif total < 0:
+                    left += 1
+                # If notal is greater than 0 then the right (positive number) needs to be decreased
+                else:
+                    right -= 1
 
-                    elif sorted_nums[lo] + sorted_nums[i] + sorted_nums[hi] < 0:
-                        lo += 1
-
-                    else:
-                        hi -= 1
+            # Add current to set so that duplicates are not considered
+            used_first_values.add(current)
 
         return triplets
-    
+
+    # Merge Sort solves sorting by breaking a problem down to an individual unit
+    # As the recursion unwinds, to individual lists of 1 valeu are compared and then sorted
+    # This prevents the need to iterate through a list multiple times as swaps are minimized as pre-sorted lists are merged together
     def mergeSort(self, nums: List[int]) -> List[int]:
 
+        # This triggers the end of the splitting and the beginning of the recursion
         if len(nums) <= 1:
             return nums
 
+        # Values need to split up list into smaller components
         mid = len(nums) // 2
         leftHalf = nums[:mid]
         rightHalf = nums[mid:]
 
+        # Recursion calls on increasingly smaller and smaller list of numbers
         sortedLeft = self.mergeSort(leftHalf)
         sortedRight = self.mergeSort(rightHalf)
 
+        # Helper function to take two lists of numbers and to merge them in sorted order
+        # This will start at the smallest possible increment of two lists of 1 number each
         def merge(left: List[int], right: List[int]) -> List[int]:
             
             sorted_list = []
-            i,j = 0,0
+            i,j = 0,0 # pointers to iterate through separate lists
 
+            # while i and j are less than the length of their lists...
             while i < len(left) and j < len(right):
+                # compare values and add to new list for efficient use of a list and NO swapping needed
                 if left[i] < right[j]:
                     sorted_list.append(left[i])
                     i+=1
@@ -86,6 +114,7 @@ class Solution:
                     sorted_list.append(right[j])
                     j += 1
 
+            # Once i or j has reached their end....just add the remaining values as they are greater than anything in sorted list
             sorted_list.extend(left[i:])
             sorted_list.extend(right[j:])
 
@@ -94,7 +123,7 @@ class Solution:
         return merge(sortedLeft, sortedRight)  
 
 if __name__ == "__main__":
-    test1 = [1,0,-1]
+    test1 = [0,0,0,0]
 
     solution = Solution()
     print(solution.threeSum(test1))
