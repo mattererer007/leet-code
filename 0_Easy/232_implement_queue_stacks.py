@@ -21,15 +21,20 @@ class MyQueue:
         
 
     def push(self, x: int) -> None:
+        return
         
 
     def pop(self) -> int:
+        return
         
 
     def peek(self) -> int:
+        return
+        
         
 
     def empty(self) -> bool:
+        return
         
 
 
