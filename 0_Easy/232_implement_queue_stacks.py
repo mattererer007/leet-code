@@ -1,5 +1,5 @@
 """
-mplement a first in first out (FIFO) queue using only two stacks. The implemented queue should support all the functions of a normal queue (push, peek, pop, and empty).
+Implement a first in first out (FIFO) queue using only two stacks. The implemented queue should support all the functions of a normal queue (push, peek, pop, and empty).
 
 Implement the MyQueue class:
 
@@ -18,29 +18,48 @@ Notes:
 class MyQueue:
 
     def __init__(self):
+        self.queue = []
         
 
     def push(self, x: int) -> None:
-        return
+        self.queue.append(x)
+
         
 
     def pop(self) -> int:
-        return
-        
+        x = self.queue[0]
+
+        new_queue = [self.queue[i] for i in range(1,len(self.queue))]
+        self.queue = new_queue
+
+        return x
 
     def peek(self) -> int:
-        return
-        
+
+        if self.empty():
+            return None
+        else:
+            return self.queue[0]
+
         
 
     def empty(self) -> bool:
-        return
-        
+
+        if not self.queue:
+            return True
+        else:
+            return False
 
 
-# Your MyQueue object will be instantiated and called as such:
-obj = MyQueue()
-obj.push(x)
-param_2 = obj.pop()
-param_3 = obj.peek()
-param_4 = obj.empty()
+if __name__ == "__main__":
+    # # Your MyQueue object will be instantiated and called as such:
+    myQueue = MyQueue()
+    myQueue.push(1)
+    myQueue.push(2)
+    print(myQueue.queue)
+    print(myQueue.peek())
+    param1 = myQueue.peek()
+    param2 = myQueue.pop()
+    param3 = myQueue.empty()
+
+    print(param1, param2, param3)
