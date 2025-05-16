@@ -4,40 +4,52 @@ from typing import List
 Build a calculator. Assume no errors
 
 """
- #O(n) time complexity as list is iterated through only once by two disconnected loops
+#O(n) time complexity as list is iterated through only once by two disconnected loops
+## Solution assumes that there will be no incorrect mathematical statements given (i.e, / 0)
+## Solution first will iterate through the mathematical priorities of functions start with multiple and divide 
+## Before moving to addition and subtraction
 class Solution:
     def calculator(self, function: List) -> int:
 
-        mult_div_list = []
-        pointer = -1
 
+        stack = []
         i = 0
+
+        # iterate through list of numbers and strings provided
         while i < len(function):
-            if function[i] == 'x':
-                mult_div_list[pointer] = mult_div_list[pointer] * function[i+1]
-                i += 2
+            token = function[i]
+            # If a multiplier or divider comes up...
+            ## Pull the last number added and perform function witht he next number
+            if token == 'x' or token == '/':
+                previous_input = stack.pop()
+                next_input = function[i+1]
+                if token == 'x':
+                    stack.append(previous_input * next_input)
+                else:
+                    stack.append(previous_input // next_input)
+                
+                i += 2 # Skip 2 ahead so as not to re-review the next_input
+            else: # Add everything else to the list
+                stack.append(token)
+                i += 1
 
-            elif function[i] == '/':
-                mult_div_list[pointer] = mult_div_list[pointer] // function[i+1]
-                i+=2
-            else:
-                mult_div_list.append(function[i])
-                i+=1
-                pointer += 1
+        # Result starts as the first number in the stack
+        result = stack[0]
+        # Skip 1 ahead and iterate through remaining addition and subtraction functions
+        i = 1
+        while i < len(stack):
+            operator = stack[i]
+            next_number = stack[i+1]
+            if operator == '+':
+                result += next_number
+            elif operator == '-':
+                result -= next_number
             
-            print(mult_div_list)
+            i += 2
 
-        if len(mult_div_list) == 1:
-            return mult_div_list[0]
-        
-        total = mult_div_list[0]
-        for i in range(0, len(mult_div_list)):
-            if mult_div_list[i] == '+':
-                total += mult_div_list[i+1]
-            elif mult_div_list[i] == '-':
-                total -= mult_div_list[i+1]
+        return result
+    
 
-        return total
 
 if __name__ == "__main__":
 
