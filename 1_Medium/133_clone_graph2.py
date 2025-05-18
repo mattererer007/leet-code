@@ -1,4 +1,5 @@
 from typing import Optional
+from collections import deque 
 
 """
 Given a reference of a node in a connected undirected graph.
@@ -34,14 +35,60 @@ class Node:
         self.val = val
         self.neighbors = neighbors if neighbors is not None else []
 
-
-
+# O(n) time complexity where n is the number of nodes
+# O(n) space complexirty to account for the quque, visited dictionary, and copy (3N at most?)
 class Solution:
     def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
-        return
+
+        # Check if nod eis provided
+        if not node:
+            return None
+        else:
+            # Create a queu startign with provided node
+            queue = deque([node])
+            # dictionary to track visited items
+            visited ={}
+
+            # Clone first node to return
+            clone_node = Node(val = node.val)
+
+            # immeidately at this first node to dictionary
+            visited[clone_node.val] = clone_node
+
+            # While there are new nodes to visit...
+            while queue:
+                curr = queue.popleft()
+
+                # pull copy from dict because the first node clone will already be tehre
+                curr_clone = visited[curr.val]
+
+                # Iterate and check if any neighbors ahve yet to be visited
+                ## If so... add to queue for later review
+                ## Create clone
+                for n in curr.neighbors:
+                    if n.val not in visited:
+                        visited[n.val] = Node(val = n.val)
+                        queue.append(n)
+
+                    # Add clone to neighbors
+                    curr_clone.neighbors.append(visited[n.val])
+    
+        return clone_node
     
 
 if __name__ == "__main__":
-    print("hello")
-    
-        
+    # Build the original graph manually
+    node1 = Node(1)
+    node2 = Node(2)
+    node3 = Node(3)
+    node4 = Node(4)
+
+    node1.neighbors = [node2, node4]
+    node2.neighbors = [node1, node3]
+    node3.neighbors = [node2, node4]
+    node4.neighbors = [node1, node3]
+
+    # root node to pass to cloneGraph
+    original_graph = node1
+
+    solution = Solution()
