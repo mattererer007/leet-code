@@ -1,0 +1,16 @@
+[package]
+name = "easy"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+[[bin]]
+name = "two_sums"
+path = "src/two_sums.rs"
+
+## FROM 0_easy
+# cargo run --bin two_sums
+# cargo run --bin another_problem
+
+## From Rust
+# cargo run (compile) -p easy (select 'easy' package aka 0_easy) --bin two_sums (select the defiend bin)
