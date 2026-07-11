@@ -8,6 +8,10 @@ edition = "2024"
 name = "two_sums"
 path = "src/two_sums.rs"
 
+[[bin]]
+name = "valid_parantheses"
+path = "src/valid_parantheses.rs"
+
 ## FROM 0_easy
 # cargo run --bin two_sums
 # cargo run --bin another_problem
