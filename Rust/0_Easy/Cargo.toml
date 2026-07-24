@@ -12,6 +12,14 @@ path = "src/two_sums.rs"
 name = "valid_parantheses"
 path = "src/valid_parantheses.rs"
 
+[[bin]]
+name = "valid_palindrome"
+path = "src/valid_palindrome.rs"
+
+[[bin]]
+name = "merged_two_sorted_lists"
+path = "src/merged_two_sorted_lists.rs"
+
 ## FROM 0_easy
 # cargo run --bin two_sums
 # cargo run --bin another_problem
