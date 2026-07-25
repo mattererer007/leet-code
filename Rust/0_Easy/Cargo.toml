@@ -17,6 +17,10 @@ name = "valid_palindrome"
 path = "src/valid_palindrome.rs"
 
 [[bin]]
+name = "valid_palindrome2"
+path = "src/valid_palindrome2.rs"
+
+[[bin]]
 name = "merged_two_sorted_lists"
 path = "src/merged_two_sorted_lists.rs"
 
