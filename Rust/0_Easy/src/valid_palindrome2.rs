@@ -10,7 +10,7 @@ impl Solution {
         let lowercase_s = s.to_lowercase();
 
 
-        for c in lowercase_s.chars(){
+        for c in lowercase_s.chars(){   
             if c.is_ascii_alphanumeric(){
                 list.push(c);
             }

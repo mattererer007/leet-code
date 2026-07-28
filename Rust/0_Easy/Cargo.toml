@@ -24,6 +24,10 @@ path = "src/valid_palindrome2.rs"
 name = "merged_two_sorted_lists"
 path = "src/merged_two_sorted_lists.rs"
 
+[[bin]]
+name = "buy_sell_stock"
+path = "src/best_time_to_buy_and_sell_stock.rs"
+
 ## FROM 0_easy
 # cargo run --bin two_sums
 # cargo run --bin another_problem
