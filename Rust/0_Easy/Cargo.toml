@@ -28,6 +28,10 @@ path = "src/merged_two_sorted_lists.rs"
 name = "buy_sell_stock"
 path = "src/best_time_to_buy_and_sell_stock.rs"
 
+[[bin]]
+name = "binary_search"
+path = "src/binary_search.rs"
+
 ## FROM 0_easy
 # cargo run --bin two_sums
 # cargo run --bin another_problem
