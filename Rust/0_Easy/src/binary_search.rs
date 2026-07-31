@@ -35,7 +35,6 @@ impl Solution {
 }
 
 
-
 fn main() {
     
     let nums = vec![2,5];
