@@ -36,6 +36,10 @@ path = "src/binary_search.rs"
 name = "anagram"
 path = "src/anagram.rs"
 
+[[bin]]
+name = "flood_fill"
+path = "src/flood_fill.rs"
+
 ## FROM 0_easy
 # cargo run --bin two_sums
 # cargo run --bin another_problem
